@@ -52,7 +52,7 @@ func (a TwitterApi) DeleteDirectMessage(id int64, includeEntities bool) (message
 
 func (a TwitterApi) postDirectMessagesImpl(v url.Values) (message DirectMessage, err error) {
 	response_ch := make(chan response)
-	a.queryQueue <- query{a.baseUrl + "/direct_messages/new.json", v, &message, _POST, response_ch}
+	a.queryQueue <- query{a.baseUrl + "/direct_messages/events/new.json", v, &message, _POST, response_ch}
 	return message, (<-response_ch).err
 }
 
